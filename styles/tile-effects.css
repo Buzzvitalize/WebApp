@@ -1,0 +1,28 @@
+.tile-shell {
+  perspective: 1000px;
+}
+
+.tile-base::before,
+.tile-base::after {
+  content: '';
+  position: absolute;
+  inset-inline: 10px;
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.tile-base::before {
+  inset-block-end: 14px;
+  height: 34px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.02), rgba(15, 23, 42, 0.6));
+  transform: skewX(-18deg);
+  filter: blur(2px);
+  opacity: 0.9;
+}
+
+.tile-base::after {
+  inset-block-end: 4px;
+  height: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03));
+  opacity: 0.3;
+}
