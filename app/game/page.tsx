@@ -23,8 +23,8 @@ export default function GamePage() {
   const selectedTile = useMemo(() => getSelectedTile(tiles, selectedTileId), [tiles, selectedTileId]);
 
   const handleTileAction = (actionId: string) => {
-    setTiles((currentTiles) =>
-      currentTiles.map((tile) => {
+    setTiles((currentTiles: BoardTile[]) =>
+      currentTiles.map((tile: BoardTile) => {
         if (tile.id !== selectedTileId || !tile.object) return tile;
 
         if (actionId === 'collect' || actionId === 'harvest') {
@@ -59,9 +59,11 @@ export default function GamePage() {
         <ResourceBar resources={resourcesMock} />
         <div className="mt-4 grid flex-1 gap-4 xl:grid-cols-[240px_minmax(0,1fr)_320px]">
           <Sidebar />
-          <section className="flex min-h-[720px] flex-col gap-4">
+          <section className="relative flex min-h-[720px] flex-col">
             <GameBoard tiles={tiles} selectedTileId={selectedTileId} onSelectTile={setSelectedTileId} />
-            <ActionPanel selectedTile={selectedTile} onAction={handleTileAction} />
+            <div className="pointer-events-none absolute inset-x-4 bottom-8 z-20 flex justify-end sm:inset-x-6 sm:bottom-10">
+              <ActionPanel selectedTile={selectedTile} onAction={handleTileAction} />
+            </div>
           </section>
           <RightPanel
             productionStats={productionStats}
